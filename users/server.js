@@ -20,6 +20,13 @@ app.get('/users', (req, res) => {
   res.send(users);
 });
 
+app.get('/users/:id',(req,res) => {
+  const uid = req.params.id;
+  console.log(uid,'userid');
+  user = users.find(subject => subject.id === parseInt(uid));
+  console.log(user,'27 u');
+  res.send(user);
+})
 
 app.post('/user/**', (req, res) => {
   const userId = parseInt(req.params[0]);

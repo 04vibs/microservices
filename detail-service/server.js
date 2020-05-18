@@ -16,7 +16,7 @@ const orderService = 'http://localhost:8082';
   app.get('/orderdetails/:id',(req, resp) =>  {
     
     let users = {
-        url: `${usersService}/user/${req.params.id}`,
+        url: `${usersService}/users/${req.params.id}`,
     };
 
     let orders = {
@@ -27,7 +27,6 @@ const orderService = 'http://localhost:8082';
     function callback(error, response, body, cb) {
         if(error || response.statusCode != 200)
           return cb(true);
-    
         cb(null, JSON.parse(body));
       }
 
@@ -51,8 +50,7 @@ const orderService = 'http://localhost:8082';
         resp.writeHead(200, {"Content-Type": "application/json"});
         console.log(results);
         resp.end(JSON.stringify(results));
-      });
-        
+      });        
     });
     
 // app.get('/orderdetails/',function(req, resp) {

@@ -15,7 +15,7 @@ const orders = [
         id: 1,
         orderAmount: 550,
         orderDate: '12-Apr-2020',
-        assignedUser: 2
+        assignedUser: 1
       },
      {
         id: 2,
@@ -47,9 +47,16 @@ app.get('/orders/:id', (req, res) => {
 
   const assignedUserId = req.params.id;
   console.log(assignedUserId);
-  order = orders.find(subject => subject.assignedUser = assignedUserId);
-  console.log(order)
-  res.send(order);
+  let result = [];
+  order = orders.find(subject => {
+    if(subject.assignedUser === parseInt(assignedUserId)){
+      result.push(subject);
+    }
+  });
+  console.log(result)
+  res.send(result);
+
+
 
 });
 
