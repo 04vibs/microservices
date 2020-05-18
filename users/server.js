@@ -16,7 +16,7 @@ const users = [
 ];
 
 app.get('/users', (req, res) => {
-  console.log('Returning heroes list');
+  console.log('Returning users list');
   res.send(users);
 });
 
@@ -24,7 +24,8 @@ app.get('/users', (req, res) => {
 
 app.post('/user/**', (req, res) => {
   const userId = parseInt(req.params[0]);
-  const foundUser = users.find(subject => subject.id === heroId);
+  console.log(userId);
+  const foundUser = users.find(subject => subject.id === userId);
 
   if (foundUser) {
       for (let attribute in foundUser) {
