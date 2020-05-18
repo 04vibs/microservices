@@ -21,7 +21,6 @@ app.get('/users', (req, res) => {
 });
 
 
-
 app.post('/user/**', (req, res) => {
   const userId = parseInt(req.params[0]);
   console.log(userId);

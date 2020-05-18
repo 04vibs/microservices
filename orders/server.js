@@ -15,7 +15,7 @@ const orders = [
         id: 1,
         orderAmount: 550,
         orderDate: '12-Apr-2020',
-        assignedUser: 0
+        assignedUser: 2
       },
      {
         id: 2,
@@ -42,6 +42,18 @@ app.get('/orders', (req, res) => {
   res.send(orders);
 });
 
+app.get('/orders/:id', (req, res) => {
+  console.log('Returning order list');
+
+  const assignedUserId = req.params.id;
+  console.log(assignedUserId);
+  order = orders.find(subject => subject.assignedUser = assignedUserId);
+  console.log(order)
+  res.send(order);
+
+});
+
+
 app.post('/assignment', (req, res) => {
   request.post({
       headers: {'content-type': 'application/json'},
@@ -55,6 +67,7 @@ app.post('/assignment', (req, res) => {
           console.log(orderId);
           const order = orders.find(subject => subject.id === orderId);
           order.assignedUser = req.body.userId;
+          console.log(order);
           res.status(202).send(order);
       } else {
           res.status(400).send({problem: `user Service responded with issue ${err}`});
@@ -63,5 +76,9 @@ app.post('/assignment', (req, res) => {
 });
 
 
-console.log(`orders service listening on port ${port}`);
-app.listen(port);
+// console.log(`orders service listening on port ${port}`);
+// app.listen(port);
+
+app.listen(8082,()=>{
+  console.log('order service started at 8082');
+})
