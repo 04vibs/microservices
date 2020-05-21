@@ -16,21 +16,17 @@ const users = [
 ];
 
 app.get('/users', (req, res) => {
-  console.log('Returning users list');
   res.send(users);
 });
 
 app.get('/users/:id',(req,res) => {
   const uid = req.params.id;
-  console.log(uid,'userid');
   user = users.find(subject => subject.id === parseInt(uid));
-  console.log(user,'27 u');
   res.send(user);
 })
 
 app.post('/user/**', (req, res) => {
   const userId = parseInt(req.params[0]);
-  console.log(userId);
   const foundUser = users.find(subject => subject.id === userId);
 
   if (foundUser) {

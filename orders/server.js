@@ -21,32 +21,28 @@ const orders = [
         id: 2,
         orderAmount: 450,
         orderDate: '15-Apr-2020',
-        assignedUser: 0
+        assignedUser: 1
       },
       {
         id: 3,
         orderAmount: 250,
         orderDate: '13-Apr-2020',
-        assignedUser: 0
+        assignedUser: 2
       },
      {
         id: 4,
         orderAmount: 500,
         orderDate: '15-Apr-2020',
-        assignedUser: 0
+        assignedUser: 3
       }  
 ];
 
 app.get('/orders', (req, res) => {
-  console.log('Returning threats list');
   res.send(orders);
 });
 
 app.get('/orders/:id', (req, res) => {
-  console.log('Returning order list');
-
   const assignedUserId = req.params.id;
-  console.log(assignedUserId);
   let result = [];
   order = orders.find(subject => {
     if(subject.assignedUser === parseInt(assignedUserId)){
@@ -55,9 +51,6 @@ app.get('/orders/:id', (req, res) => {
   });
   console.log(result)
   res.send(result);
-
-
-
 });
 
 
@@ -71,10 +64,8 @@ app.post('/assignment', (req, res) => {
   }, (err, userResponse, body) => {
       if (!err) {
           const orderId = parseInt(req.body.orderId);
-          console.log(orderId);
           const order = orders.find(subject => subject.id === orderId);
           order.assignedUser = req.body.userId;
-          console.log(order);
           res.status(202).send(order);
       } else {
           res.status(400).send({problem: `user Service responded with issue ${err}`});
