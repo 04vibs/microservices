@@ -1,0 +1,21 @@
+detail-service:
+      # container_name: product-service
+       image:
+            04prashant/detail-service:latest
+       expose:
+            - 8085
+       ports:
+            - "8085:8085" 
+           
+ order-service:
+       container_name: order-service
+       image:
+            04prashant/order-service:latest
+       expose:
+            - 8083
+       ports:
+            - "8083:8080" 
+       links:
+            - detail-service:detail-service
+       depends_on:
+            - detail-service
